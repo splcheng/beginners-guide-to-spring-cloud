@@ -11,6 +11,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.sleuth.Sampler;
 import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -18,7 +19,6 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
 @EnableZuulProxy
 public class WebApplication {
 
@@ -26,6 +26,7 @@ public class WebApplication {
 		SpringApplication.run(WebApplication.class, args);
 	}
 
+	@Configuration
 	static class MyConfig {
 		@Bean
 		@LoadBalanced
@@ -39,9 +40,9 @@ public class WebApplication {
 
 	}
 
-	@FeignClient("name")
-	static interface NameService {
-		@RequestMapping("/")
-		public String getName();
-	}
+//	@FeignClient("name")
+//	static interface NameService {
+//		@RequestMapping("/")
+//		public String getName();
+//	}
 }
